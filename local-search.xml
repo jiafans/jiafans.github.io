@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Introduction to System Software</title>
+    <link href="/2021/04/02/Introduction-to-System-Software/"/>
+    <url>/2021/04/02/Introduction-to-System-Software/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Lecture-1"><a href="#Lecture-1" class="headerlink" title="Lecture 1"></a>Lecture 1</h1><h2 id="System-Software-is-computer-software-designed-to"><a href="#System-Software-is-computer-software-designed-to" class="headerlink" title="System Software is computer software designed to"></a>System Software is computer software designed to</h2><ul><li>Operate and control the computer hardware</li><li>Provide a platform for running application software</li></ul><h2 id="System-software-includes-the-following"><a href="#System-software-includes-the-following" class="headerlink" title="System software includes the following:"></a>System software includes the following:</h2><ul><li>Operating system, allows the parts of a computer to work together and also provides a platform to run high-level system software and application software</li><li>Utility software, helps to analyze, configure, optimize and maintain the computer</li><li>Device drivers, like BIOS and device firmware provide basic functionality to operate and control the hardware</li><li>A user interface</li><li>Sometimes developer tools</li></ul><h2 id="What-is-an-Operating-System"><a href="#What-is-an-Operating-System" class="headerlink" title="What is an Operating System?"></a>What is an Operating System?</h2><ul><li>An intermediary between a user of a computer and the computer hardware</li><li>Goals to execute user programs and make solving user problems easier</li><li>Goals to make the computer system convenient to use</li><li>Goals to use the computer hardware in an efficient manner</li></ul><h2 id="Operating-System-Definition"><a href="#Operating-System-Definition" class="headerlink" title="Operating System Definition"></a>Operating System Definition</h2><ul><li>OS is a resource allocator<ul><li>Manages all resources</li><li>Decides between conflicting requests for efficient and fair resources use</li></ul></li><li>OS is a control program<ul><li>Controls execution of programs to prevent errors and improper use of the computer</li></ul></li><li>Kernel-The program running at all times on the computer</li></ul><h2 id="Computer-Startup"><a href="#Computer-Startup" class="headerlink" title="Computer Startup"></a>Computer Startup</h2><ul><li>Bootstrap program is loaded at power-up or reboot<ul><li>Typically stored in ROM or EPROM, generally known as firmware</li><li>Initializes all aspects of system</li><li>Loads operating system kernel and starts excution</li></ul></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>EECS 111</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>计算机基础</tag>
+      
+      <tag>课堂笔记</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>在树莓派上配置Plex服务器</title>
     <link href="/2021/03/09/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%85%8D%E7%BD%AEPlex%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     <url>/2021/03/09/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%85%8D%E7%BD%AEPlex%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
