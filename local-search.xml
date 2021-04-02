@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>在树莓派上配置Plex服务器</title>
+    <link href="/2021/03/09/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%85%8D%E7%BD%AEPlex%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <url>/2021/03/09/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%85%8D%E7%BD%AEPlex%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="在树莓派上配置Plex-Media-Server"><a href="#在树莓派上配置Plex-Media-Server" class="headerlink" title="在树莓派上配置Plex Media Server"></a>在树莓派上配置Plex Media Server</h1><h2 id="启动之前"><a href="#启动之前" class="headerlink" title="启动之前"></a>启动之前</h2><p>先创建一个用于储存Plex媒体文件的目录：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo mkdir -p /opt/plexmedia/&#123;movies,series&#125;<br></code></pre></td></tr></table></figure><p>再设置Plex Media Server作为用户plex运行，并添加对媒体文件和目录的读写的权限：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo chown -R plex: /opt/plexmedia<br></code></pre></td></tr></table></figure><blockquote><p>此处可以选择别的位置来储存</p></blockquote><p>我们现在把移动硬盘插上树莓派，输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">fdisk -l<br>df -h<br></code></pre></td></tr></table></figure><p>找到接入的硬盘的位置，像我的就是在/dev/sda2/的位置</p><p>接下来</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkdir /home/pi/Seagate <span class="hljs-comment">##创建想要挂载到的文件夹路径</span><br>mount /dev/sda2 /home/pi/Seagate<br></code></pre></td></tr></table></figure><p>此时可能会出现挂载错误的提示，很有可能是因为移动硬盘的格式是NTFS或是exFAT格式的，树莓派不能原生支持这种格式，先别急，在终端中输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get install exfat-fuse<br>modprobe fuse<br></code></pre></td></tr></table></figure><p>不出意外此时就可以用mount指令挂载移动硬盘了</p><blockquote><p> 如果还有问题可以通过reboot指令重启树莓派就行了</p></blockquote><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>接下来打开浏览器输入 YOUR_SERVER_IP:32400/web 打开配置的GUI界面</p><p><img src="https://raspberrypi.club/wp-content/uploads/2020/01/plex-media-server-sign-in.jpg" alt="如何在 Raspberry Pi 上安装 Plex Media Server-树莓派俱乐部"></p><p>为了使用Plex，我们需要先创建一个账户登录或者用Google和Facebook的API登录，之后在iOS，安卓或是网页端都是使用此账号连接我们的树莓派服务器。</p><p>注册并登录后会被导航到这个网页</p><p><img src="https://raspberrypi.club/wp-content/uploads/2020/01/how-plex-works-1024x529.jpg" alt="如何在 Raspberry Pi 上安装 Plex Media Server-树莓派俱乐部"></p><p>点击 “GOT IT!” 并在下一个页面上输入想要的Plex服务器的名称并点击 “NEXT”<img src="https://raspberrypi.club/wp-content/uploads/2020/01/plex-server-setup-hostname-1024x593.jpg" alt="如何在 Raspberry Pi 上安装 Plex Media Server-树莓派俱乐部"></p><blockquote><p>如果没有购买Plex Pass不要勾选 “Allow me to access my media outside my home”</p></blockquote><h2 id="配置Plex媒体库"><a href="#配置Plex媒体库" class="headerlink" title="配置Plex媒体库"></a>配置Plex媒体库</h2><p>下一步是添加媒体库，点击 “Add Library” 添加库，根据自身需求添加媒体库文件种类，我们这里使用Movies</p><p><img src="https://raspberrypi.club/wp-content/uploads/2020/01/plex-media-server-add-library.jpg" alt="如何在 Raspberry Pi 上安装 Plex Media Server-树莓派俱乐部"></p><p>在下一步中，单机 “Browse for media folder”, 将之前挂载的移动硬盘的路径添加进去，点击 “Add”, 再 “Add library”</p><p><img src="https://raspberrypi.club/wp-content/uploads/2020/01/plex-media-library.jpg" alt="如何在 Raspberry Pi 上安装 Plex Media Server-树莓派俱乐部"></p><p>之后点击 “Next”, 就算配置完成了，此时Plex会扫描媒体库内的所有视频文件，并用自带的刮削器在线获取电影封面等其他信息</p><p>之后也可以按照自身需求添加不同的媒体库</p><blockquote><p>树莓派的视频转码能力很差，如果码率太高需要等待一定时间转码</p><p>本文的教程信息基于树莓派俱乐部的<a href="https://raspberrypi.club/298.html">教程</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>最近捣鼓的</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>树莓派</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>在树莓派上安装Plex服务器</title>
+    <link href="/2021/03/09/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E5%AE%89%E8%A3%85Plex%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <url>/2021/03/09/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E5%AE%89%E8%A3%85Plex%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="在树莓派上创建Plex服务器"><a href="#在树莓派上创建Plex服务器" class="headerlink" title="在树莓派上创建Plex服务器"></a>在树莓派上创建Plex服务器</h1><h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>先在树莓派上安装好Raspbian，最新的版本是基于Debian Buster。添加ssh文件进tf卡根目录开启SSH功能。接上网线，用Fing查找局域网内的树莓派IPv4的地址。</p><hr><h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>先用SSH工具连接上树莓派的IP，默认的用户名为pi，密码为raspberry。<br>使用</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo passwd root<br></code></pre></td></tr></table></figure><p>命令更改root密码，之后使用su输入设置好的密码登入root，这样就可以省去每次在命令前增加sudo的繁琐操作了。<br>因为在国内下载国外软件连接会很慢，所以先更改一下repository源</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi /etc/apt/sources.list<br></code></pre></td></tr></table></figure><p>删除所有内容用以下替代</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">deb http:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/raspbian/</span>raspbian/ buster main non-free contrib rpi<br>deb-src http:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/raspbian/</span>raspbian/ buster main non-free contrib rpi<br></code></pre></td></tr></table></figure><p>同样的</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi /etc/apt/sources.list.d/raspi.list<br></code></pre></td></tr></table></figure><p>删除所有内容用以下替代</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">deb http:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/raspberrypi/</span> buster main ui<br></code></pre></td></tr></table></figure><p>在vi编辑器里输入或删除内容前要先按“i”进入INSERT模式，替换完成后按esc，输入:wq退出。<br>接下来更新apt源并更新软件</p><blockquote><p>此处的-y是跳过输入Y确认的一步</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get update<br>apt-get upgrade -y<br></code></pre></td></tr></table></figure><p>接下来安装需要的依赖软件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install apt-transport-https ca-certificates curl<br></code></pre></td></tr></table></figure><p>运行以下命令导入存储库的GPG密钥，将APT存储库添加到系统的软件存储库列表中并再次更新源</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -<br><span class="hljs-built_in">echo</span> deb https://downloads.plex.tv/repo/deb public main | sudo tee /etc/apt/sources.list.d/plexmediaserver.list<br>apt-get update<br></code></pre></td></tr></table></figure><p>最后开始安装Plex服务端</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install plexmediaserver<br></code></pre></td></tr></table></figure><p>这一部分会比较耗时，中间需要输入Y继续</p><hr><p>##检验安装</p><p>不出意外就正式安装好了！<br>我们可以看看Plex服务是不是已经在运行了，输入：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo systemctl status plexmediaserver<br></code></pre></td></tr></table></figure><p>如果输出是</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">● plexmediaserver.service - Plex Media Server<br>   Loaded: loaded (/lib/systemd/system/plexmediaserver.service; enabled; vendor preset: enabled)<br>  Active: active (running) since Sun 2019-05-26 08:11:09 EDT; 27min ago<br>  Process: 11470 ExecStartPre=/bin/sh -c /usr/bin/<span class="hljs-built_in">test</span> -d <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR&#125;</span>&quot;</span> || /bin/mkdir -p <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR&#125;</span>&quot;</span> (code=exited, status=0/SUCCESS)<br>Main PID: 11474 (sh)<br>  CGroup: /system.slice/plexmediaserver.service<br></code></pre></td></tr></table></figure><p>这样的，就说明正常运行了<br>按ctrl+c退出，接下来进入配置过程！</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>最近捣鼓的</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>树莓派</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>安装Homebrew出现Connection refused</title>
+    <link href="/2021/03/08/%E5%AE%89%E8%A3%85Homebrew%E5%87%BA%E7%8E%B0Connection-refused/"/>
+    <url>/2021/03/08/%E5%AE%89%E8%A3%85Homebrew%E5%87%BA%E7%8E%B0Connection-refused/</url>
+    
+    <content type="html"><![CDATA[<h1 id="安装Homebrew出现Connection-refused"><a href="#安装Homebrew出现Connection-refused" class="headerlink" title="安装Homebrew出现Connection refused"></a>安装Homebrew出现Connection refused</h1><p>最近想通过Homebrew在Mac上实现像Linux系统那样仅用yum或apt等命令行一键安装和更新软件。根据官网的安装说明，安装Homebrew的方法十分简单，仅需要打开Mac上的终端输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/bin/bash -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)</span>&quot;</span><br></code></pre></td></tr></table></figure><p>这一行命令就可以实现一键安装。</p><p>但是不知因为什么原因，输入这段命令总是会提示</p><p><img src="2021-03-08_7.19.47.png"></p><p>似乎是因为网站的端口对我关闭了，使得curl命令无法连接到此网址。</p><p>一般在Linux系统内遇到这种方法我可以通过查询此网站open的IP并对本地的IP协议进行修改，但是这次我尝试了一个新的方法。我直接用本地的浏览器打开了<br><a href="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh">https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh</a><br>此网址，出现一长串的脚本。将所有文本保存下来并用编辑器保存成install.sh文件。</p><p>再使用终端输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/bin/bash <span class="hljs-comment">##储存在电脑上的路径/install.sh</span><br></code></pre></td></tr></table></figure><p>按照终端上的指示，成功安装。</p><blockquote><p>进入<a href="https://site.ip138.com/raw.Githubusercontent.com/">https://site.ip138.com/raw.Githubusercontent.com/</a>可查询相关网站的IP地址</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>最近捣鼓的</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Mac</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
