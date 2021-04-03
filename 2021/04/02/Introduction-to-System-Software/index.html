@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      559 字
+      674 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      13
        分钟
     </span>
   
@@ -325,6 +325,35 @@
 <li>OS indexes into I/O device table to determine device status and modify table entry include interrupt</li>
 </ul>
 </li>
+</ul>
+<h2 id="Direct-Memory-Access-Structure"><a href="#Direct-Memory-Access-Structure" class="headerlink" title="Direct Memory Access Structure"></a>Direct Memory Access Structure</h2><p><img src="https://i.loli.net/2021/04/03/1wz74WTE5RqroaA.png" srcset="/img/loading.gif" lazyload alt="CleanShot 2021-04-03 at 13.15.55@2x"></p>
+<ul>
+<li>DMA: Direct Memory Access</li>
+</ul>
+<h2 id="How-a-Modern-Computer-Works"><a href="#How-a-Modern-Computer-Works" class="headerlink" title="How a Modern Computer Works?"></a>How a Modern Computer Works?</h2><p><img src="https://i.loli.net/2021/04/03/yYwJQSmxKWrZbf7.png" srcset="/img/loading.gif" lazyload alt="CleanShot 2021-04-03 at 13.17.29@2x"></p>
+<h2 id="Storage-Hierarchy"><a href="#Storage-Hierarchy" class="headerlink" title="Storage Hierarchy"></a>Storage Hierarchy</h2><ul>
+<li>Storage systems organized in herarchy based on <ul>
+<li>Speed</li>
+<li>Cost</li>
+<li>Volatility</li>
+</ul>
+</li>
+<li><strong>Caching</strong> is often used between storage systems<ul>
+<li>transparently copying information into faster storage system (e.g. CPU cache holds most-recently used data from main memory)</li>
+<li>main memory can be viewed as a <em>cache</em> for secondary storage</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/03/6zFQRWr3fgqUaLZ.png" srcset="/img/loading.gif" lazyload alt="CleanShot 2021-04-03 at 13.29.27@2x"></p>
+<h2 id="CPU-Protection"><a href="#CPU-Protection" class="headerlink" title="CPU Protection"></a>CPU Protection</h2><ul>
+<li>Timer - interrupts computer after specified period to ensure that OS maintain control<ul>
+<li>Timer is decremented every clock tick</li>
+<li>When timer reaches a value of 0, an interrupt occurs</li>
+</ul>
+</li>
+<li>Timer is commonly used to implement time sharing</li>
+<li>Timer is also used to compute the current time</li>
+<li>Load timer is a privileged instruction</li>
 </ul>
 
             </div>
