@@ -4,7 +4,7 @@
         "details": [
             {
                 "appID": "xxxx.com.tencent.Moa.db",
-                "paths": ["*"]
+                "paths": ["/Tags/*"]
             }
         ]
     }
