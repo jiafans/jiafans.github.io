@@ -1,0 +1,11 @@
+{
+    "applinks":{
+        "apps": [],
+        "details": [
+            {
+                "appID": "xxxx.com.tencent.Moa.db",
+                "paths": ["*"]
+            }
+        ]
+    }
+}
